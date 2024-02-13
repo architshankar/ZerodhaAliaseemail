@@ -1,0 +1,14 @@
+
+.main {
+    display: flex;
+    justify-content: flex-start; /* Elements will be spaced equally with space on left and right */
+    flex-direction: column;
+    align-items: center; /* Optional: Align items vertically in the center */
+    height: 100vh; /* Adjust height as needed */
+}
+
+.context{
+    position: relative;
+    right: 40px;
+    background-color: bisque;
+}

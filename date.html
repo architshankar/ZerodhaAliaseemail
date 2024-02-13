@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You have been tricked</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap" rel="stylesheet">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        /* fonts  */
+        body {
+    font-family: 'Protest Riot', sans-serif;
+    color: #333; /* Dark gray text color */
+    background-color: #fff; /* White background color */
+}
+
+
+
+
+        /* yes button */
+        .yes-button {
+            --green: #1BFD9C;
+            font-size: 15px;
+            padding: 0.7em 2.7em;
+            letter-spacing: 0.06em;
+            position: relative;
+            font-family: inherit;
+            border-radius: 0.6em;
+            overflow: hidden;
+            transition: all 0.3s;
+            line-height: 1.4em;
+            border: 2px solid var(--green);
+            background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%, transparent 60%, rgba(27, 253, 156, 0.1) 100%);
+            color: var(--green);
+            box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+        }
+
+        .yes-button:hover {
+            color: #82ffc9;
+            box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
+        }
+
+        .yes-button:before {
+            content: "";
+            position: absolute;
+            left: -4em;
+            width: 4em;
+            height: 100%;
+            top: 0;
+            transition: transform .4s ease-in-out;
+            background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%, rgba(27, 253, 156, 0.1) 60%, transparent 100%);
+        }
+
+        .yes-button:hover:before {
+            transform: translateX(15em);
+        }
+
+        /* no button */
+        .no-button {
+            --red: #fc0707;
+            font-size: 15px;
+            padding: 0.7em 2.7em;
+            letter-spacing: 0.06em;
+            position: relative;
+            font-family: inherit;
+            border-radius: 0.6em;
+            overflow: hidden;
+            transition: all 0.3s;
+            line-height: 1.4em;
+            border: 2px solid var(--red);
+            background: linear-gradient(to right, rgba(253, 110, 27, 0.1) 1%, transparent 40%, transparent 60%, rgba(253, 84, 27, 0.1) 100%);
+            color: var(--red);
+            box-shadow: inset 0 0 10px rgba(215, 121, 49, 0.4), 0 0 9px 3px rgba(253, 76, 27, 0.1);
+        }
+
+        .no-button:hover {
+            color: #ff9582;
+            box-shadow: inset 0 0 10px rgba(253, 72, 27, 0.6), 0 0 9px 3px rgba(253, 68, 27, 0.2);
+        }
+
+        .no-button:before {
+            content: "";
+            position: absolute;
+            left: -4em;
+            width: 4em;
+            height: 100%;
+            top: 0;
+            transition: transform .4s ease-in-out;
+            background: linear-gradient(to right, transparent 1%, rgba(253, 61, 27, 0.1) 40%, rgba(253, 129, 27, 0.1) 60%, transparent 100%);
+        }
+
+        .no-button:hover:before {
+            transform: translateX(15em);
+        }
+
+        /* Add your CSS styles here */
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .valentine-container {
+            text-align: center;
+        }
+
+        .text-container {
+            margin-top: 10px;
+        }
+
+        .yes-button {
+            font-size: 16px;
+            /* Change the initial font size */
+            transition: font-size 0.5s ease;
+        }
+
+        .no-button {
+            font-size: 16px;
+        }
+
+        .no-button:hover+.yes-button {
+            font-size: 36px;
+            /* Adjust the desired font size on hover */
+        }
+
+        /* loader animations */
+        /* loader */
+        .loaderBar {
+            width: calc(160px / 0.707);
+            height: 10px;
+            background: #F9F9F9;
+            border-radius: 10px;
+            border: 1px solid #006DFE;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loaderBar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            border-radius: 5px;
+            background: repeating-linear-gradient(45deg, #0031F2 0 30px, #006DFE 0 40px) right/200% 100%;
+            animation: fillProgress 6s ease-in-out infinite, lightEffect 1s infinite linear;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fillProgress {
+            0% {
+                width: 0;
+            }
+
+            33% {
+                width: 33.333%;
+            }
+
+            66% {
+                width: 66.67%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes lightEffect {
+
+            0%,
+            20%,
+            40%,
+            60%,
+            80%,
+            100% {
+                background: repeating-linear-gradient(45deg, #0031F2 0 30px, #006DFE 0 40px) right/200% 100%;
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                background: repeating-linear-gradient(45deg, #0031F2 0 30px, #006DFE 0 40px, rgba(255, 255, 255, 0.3) 0 40px) right/200% 100%;
+            }
+        }
+
+
+
+        /* overlays */
+
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(255, 255, 255);
+            /* semi-transparent black overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .centered-element {
+            background-color: #fff;
+            /* Example: white background for the centered element */
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+
+        h1 {
+            position: relative;
+            top: -55px;
+        }
+
+        h3 {
+            position: relative;
+            top: -55px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="overlay">
+        <div class="centered-element">
+            <div class="loaderBar" id="loading"></div>
+        </div>
+    </div>
+
+
+    <div class="centered-container">
+        <div class="valentine-container" id="valentine-container">
+
+        </div>
+    </div>
+
+    <script>
+        function setYesPressed(value) {
+            yesPressed = value;
+
+            // Define an asynchronous function
+            async function sendYToBackend() {
+                try {
+                    const response = await fetch('http://localhost:3000/send-message', {
+                        method: 'POST',
+                        mode: 'no-cors',  // Set the mode to 'no-cors'
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ value: 'Hello from the backend!' }),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    alert(result.message); // Display the response from the backend
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                }
+            }
+
+            // Call the asynchronous function
+            sendYToBackend();
+
+            updateUI();
+        }
+
+
+        // Your other initialization logic goes here
+        // JavaScript logic
+        const valentineContainer = document.getElementById("valentine-container");
+        let noCount = 0;
+        let yesPressed = false;
+        let yesButtonSize = 16;
+
+        function getNoButtonText() {
+            const phrases = [
+                "No",
+                "Are you sure?",
+                "Really sure?",
+                "Think again!",
+                "Last chance!",
+                "Surely not?",
+                "You might regret this!",
+                "Give it another thought!",
+                "Are you absolutely certain?",
+                "This could be a mistake!",
+                "Have a heart!",
+                "Don't be so cold!",
+                "Change of heart?",
+                "Wouldn't you reconsider?",
+                "Is that your final answer?",
+                "You're breaking my heart ;(",
+            ];
+
+            return phrases[Math.min(Math.floor((Date.now() / 1000) % phrases.length), phrases.length - 1)];
+        }
+
+        function updateUI() {
+            if (yesPressed) {
+                valentineContainer.innerHTML = `
+            <img src="./mmk.gif" />
+            <div class="text-container">Ok yay!!! Time discussion in DMs?</div>`;
+                console.log("pressed yes");
+            } else {
+                valentineContainer.innerHTML = `
+            
+            <img class="h-[200px]" style="width: 305px;height: 252px;position: relative;top: -114px;" src="mml.gif">
+            <h3 class="text-container">Hey Sakshi ! I've been meaning to ask you this ever since I saw your smile for the very first time</h3>
+            <h1>I think you're very precious and would love to get to know you.. So would you like to go on a lunch date with me ?</h1>
+            <div>
+                <button id="yesButton" class="yes-button"
+                    style="font-size: ${yesButtonSize}px"
+                    onclick="setYesPressed(true)">Yes</button>
+                    <button id="noButton" onclick="handleFirstClick('no')" class="no-button">${noCount === 0 ? "No" : getNoButtonText()}</button>
+            </div>`;
+            }
+        }
+
+
+
+        let isFirstClick = true;
+
+        function handleFirstClick(value) {
+            if (isFirstClick) {
+                alert("Double click to confirm (╥﹏╥) ");
+                isFirstClick = false;
+
+                // Remove the single click handler
+                document.getElementById("noButton").removeAttribute("onclick");
+
+                // Attach the double click handler
+                document.getElementById("noButton").addEventListener("dblclick", handleDoubleClick);
+            }
+        }
+
+        function handleDoubleClick() {
+            alert("I respect your decision , just never loose your smile okay? •ᴗ•");
+            // Define an asynchronous function
+            async function sendNToBackend() {
+                try {
+                    const response = await fetch('http://localhost:3000/sendN-message', {
+                        method: 'POST',
+                        mode: 'no-cors',  // Set the mode to 'no-cors'
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ value: 'Hello from the backend!' }),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    alert(result.message); // Display the response from the backend
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                }
+            }
+
+            // Call the asynchronous function
+            sendNToBackend();
+
+        }
+
+        // counting the yes
+
+
+
+        // Initial UI update
+        updateUI();
+
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+        let intervalId;
+        noButton.addEventListener('mouseenter', () => {
+            noCount = 1;
+            intervalId = setInterval(() => {
+                document.getElementById("noButton").innerText = getNoButtonText();
+                let fontSize = parseInt(window.getComputedStyle(yesButton).fontSize);
+                yesButton.style.fontSize = (fontSize + 3) + 'px';
+            }, 50); // Adjust the interval duration if needed
+        });
+
+        noButton.addEventListener('mouseleave', () => {
+            clearInterval(intervalId);
+        });
+
+        noButton.addEventListener('mouseleave', () => {
+            clearInterval(intervalId);
+        });
+        console.log("Page initialized");
+
+    </script>
+
+
+    <script>
+        var loading = document.getElementById("loading");
+
+        // Wait for the window to load
+        window.addEventListener("load", () => {
+            // Set a timeout of 3000 milliseconds (3 seconds)
+            setTimeout(() => {
+                // Hide the "loading" element after 3 seconds
+                loading.style.display = "none";
+            }, 2500);
+        });
+        // Get the overlay element
+        var overlays = document.querySelectorAll(".overlay");
+
+        // Function to hide the overlay after 3 seconds
+        function hideOverlays() {
+            overlays.forEach(function (overlay) {
+                overlay.style.display = "none";
+            });
+        }
+
+        // Set a timeout of 3000 milliseconds (3 seconds)
+        setTimeout(hideOverlays, 2500);
+        emailjs.init("UG8AZVK0kXxUC4F1T");
+
+    document.getElementById('yesButton').addEventListener('click', function() {
+        // Replace 'your_template_id' with your actual Email.js template ID
+        emailjs.send("service_t79oh38","template_k2gjfo2", {
+            to_email: 'ashankar637@gmail.com',
+            // Additional template variables if needed
+        })
+        .then(function(response) {
+            console.log('Email sent successfully:', response);
+            alert('Email sent successfully!');
+        }, function(error) {
+            console.error('Error sending email:', error);
+            alert('Error sending email. Check console for details.');
+        });
+    });
+    document.getElementById('noButton').addEventListener('click', function() {
+        // Replace 'your_template_id' with your actual Email.js template ID
+        emailjs.send("service_t79oh38","template_fk0jq0b", {
+            to_email: 'ashankar637@gmail.com',
+            message: 'This is your custom message!',
+            // Additional template variables if needed
+        })
+        .then(function(response) {
+            console.log('Email sent successfully:', response);
+            alert('Email sent successfully!');
+        }, function(error) {
+            console.error('Error sending email:', error);
+            alert('Error sending email. Check console for details.');
+        });
+    });
+    </script>
+
+
+
+
+</body>
+
+</html>
