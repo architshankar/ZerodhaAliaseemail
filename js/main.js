@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Wait for the DOM to be fully loaded
-
+//
   setTimeout(function () {
     // Show the signup modal after 3 seconds
     document.getElementById("signupModal").style.display = "block";
