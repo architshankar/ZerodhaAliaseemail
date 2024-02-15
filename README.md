@@ -1,2 +1,2 @@
 # ZerodhaAliaseemail
-Some interesting for people who are hard to forget . for email
+Something interesting for people who are hard to forget . for email
