@@ -1,90 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <title>Zerodha</title>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
-    <title> Zerodha </title>
-</head>
-
-<body>
-
+  <body>
     <div
-        style="display: flex;  justify-content: space-between; padding-top: 20px; padding: 10px; box-shadow: 2px 1px 2px #eee;">
-        <img src="nav.png" height="40" width="150" alt="image not found!" style="padding-top: 5px;">
-        <div style="display: flex; ">
-            <span style="padding: 20px; color: #666; cursor: pointer;">Signup</span>
-            <span style="padding: 20px; color: #666; cursor: pointer;">About</span>
-            <span style="padding: 20px; color: #666; cursor: pointer;">Product</span>
-            <span style="padding: 20px; color: #666; cursor: pointer;">Pricing</span>
-            <span style="padding: 20px; color: #666; cursor: pointer;">Support</span>
-
-        </div>
-
+      style="
+        display: flex;
+        justify-content: space-between;
+        padding-top: 20px;
+        padding: 10px;
+        box-shadow: 2px 1px 2px #eee;
+      "
+    >
+      <img
+        src="nav.png"
+        height="40"
+        width="150"
+        alt="image not found!"
+        style="padding-top: 5px"
+      />
+      <div style="display: flex">
+        <span style="padding: 20px; color: #666; cursor: pointer">Signup</span>
+        <span style="padding: 20px; color: #666; cursor: pointer">About</span>
+        <span style="padding: 20px; color: #666; cursor: pointer">Product</span>
+        <span style="padding: 20px; color: #666; cursor: pointer">Pricing</span>
+        <span style="padding: 20px; color: #666; cursor: pointer">Support</span>
+      </div>
     </div>
-    <br>
+    <br />
 
     <div id="signupModal" class="modal">
-        <div class="modal-content">
-            <form class="form-control">
-                <div class="wrap1">
-                    <div class="data1">
-                        <input type="text" autocomplete="off" name="text" class="input" placeholder="Email"
-                            title="Make sure you enter a valid email ">
-                    </div>
-                    <!-- <div class="data2">
+      <div class="modal-content">
+        <form class="form-control">
+          <div class="wrap1">
+            <div class="data1">
+              <input
+                type="text"
+                autocomplete="off"
+                name="text"
+                class="input"
+                placeholder="Email"
+                title="Make sure you enter a valid email "
+              />
+            </div>
+            <!-- <div class="data2">
                         <input type="password" autocomplete="off" name="text" class="input" placeholder="Password">
                     </div> -->
-                    <div class="data2">
-                        <input type="password" id="passwordField" autocomplete="off" name="text" class="input"
-                            placeholder="Password">
-                        <img src="/js/closed-eye.png" alt="Show Password" class="show-password-toggle eye-icon"
-                            onclick="togglePasswordVisibility()">
-                    </div>
-                    <div class="data3">
-                        <input type="password" id="passwordField" autocomplete="off" name="text" class="input"
-                            placeholder="Re-enter Password">
-                        <img src="/js/closed-eye.png" alt="Show Password" class="show-password-toggle eye-icon"
-                            onclick="togglePasswordVisibility()">
-
-                    </div>
-
-                </div>
-                <img src="/signup-pic.jpg" class="image" alt="Your Image">
-            </form>
-            <div class="button1"><button id="signupButton" class="redirectButton"> Sign-up now!
-                </button> </div>
-            
-
-
+            <div class="data2">
+              <input
+                type="password"
+                id="passwordField"
+                autocomplete="off"
+                name="text"
+                class="input p1"
+                placeholder="Password"
+              />
+              <img
+                src="/js/closed-eye.png"
+                alt="Show Password"
+                class="show-password-toggle eye-icon icon1"
+                onclick="togglePasswordVisibility()"
+              />
+            </div>
+            <div class="data3">
+              <input
+                type="password"
+                id="passwordFiel"
+                autocomplete="off"
+                name="text"
+                class="input p2"
+                placeholder="Re-enter Password"
+              />
+              <img
+                src="/js/closed-eye.png"
+                alt="Show Password"
+                class="show-password-toggle eye-icon icon2"
+                onclick="togglePasswordVisibility()"
+              />
+            </div>
+          </div>
+          <img src="/signup-pic.jpg" class="image" alt="Your Image" />
+        </form>
+        <div class="button1">
+          <button id="signupButton" class="redirectButton">Sign-up now!</button>
         </div>
-
+      </div>
     </div>
 
-
-    <br>
+    <br />
 
     <center>
-        <img src="landing.png" width="1000" height="400" alt="image not found!">
+      <img src="landing.png" width="1000" height="400" alt="image not found!" />
     </center>
 
-    <br>
-    <br>
+    <br />
+    <br />
     <center>
-        <h1 style=" font-weight: 500;">Invest in everything</h1>
+      <h1 style="font-weight: 500">Invest in everything</h1>
     </center>
     <center>
-        <h3 style=" font-weight: 400;">Online platform to invest in stocks, derivatives, mutual funds, and more</h3>
-        <br>
-        <span
-            style=" background-color: rgb(10, 64, 163); padding: 10px 20px; color: white; border-radius: 3px; cursor: pointer;">Sign
-            up now </span>
+      <h3 style="font-weight: 400">
+        Online platform to invest in stocks, derivatives, mutual funds, and more
+      </h3>
+      <br />
+      <span
+        style="
+          background-color: rgb(10, 64, 163);
+          padding: 10px 20px;
+          color: white;
+          border-radius: 3px;
+          cursor: pointer;
+        "
+        >Sign up now
+      </span>
     </center>
 
     <script src="js/main.js"></script>
-
-
-</body>
-
+  </body>
 </html>
