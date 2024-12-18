@@ -1,48 +1,57 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Wait for the DOM to be fully loaded
-
-    setTimeout(function () {
-        // Show the signup modal after 3 seconds
-        document.getElementById('signupModal').style.display = 'block';
-    }, 500); // Adjust the timeout duration as needed
+  // Wait for the DOM to be fully loaded
+//
+  setTimeout(function () {
+    // Show the signup modal after 3 seconds
+    document.getElementById("signupModal").style.display = "block";
+  }, 500); // Adjust the timeout duration as needed
 });
 
 // password filed
 
-function togglePasswordVisibility() {
-    var passwordField = document.getElementById("passwordField");
-    var eyeIcon = document.querySelector(".show-password-toggle .eye-icon");
-
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-        eyeIcon.src = "./openn-eye.png";
-    } else {
-        passwordField.type = "password";
-        eyeIcon.src = "./closed-eye.png";
-    }
+function togglePasswordVisibility(passwordField, eyeIcon) {
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+    eyeIcon.src = "./js/openn-eye.png";
+  } else {
+    passwordField.type = "password";
+    eyeIcon.src = "./js/closed-eye.png";
+  }
 }
 
-// Clicking outside signup !
-document.addEventListener('DOMContentLoaded', function () {
-    var modalContents = document.getElementsByClassName('modal-content');
+var passwordField1 = document.querySelector(".p1");
+var passwordField2 = document.querySelector(".p2");
+var eyeIcon1 = document.querySelector(".icon1");
+var eyeIcon2 = document.querySelector(".icon2");
 
-    document.addEventListener('click', function (event) {
-        for (var i = 0; i < modalContents.length; i++) {
-            var isClickInsideModal = modalContents[i].contains(event.target);
-
-            if (isClickInsideModal) {
-                // Click occurred inside one of the modal contents, no need to show alert
-                return;
-            }
-        }
-
-        // Click occurred outside all modal contents
-        alert('Please sign up to proceed !');
-    });
+eyeIcon1.addEventListener("click", function () {
+  togglePasswordVisibility(passwordField1, eyeIcon1);
 });
 
+eyeIcon2.addEventListener("click", function () {
+  togglePasswordVisibility(passwordField2, eyeIcon2);
+});
 
-// loader 
+// Clicking outside signup !
+document.addEventListener("DOMContentLoaded", function () {
+  var modalContents = document.getElementsByClassName("modal-content");
+
+  document.addEventListener("click", function (event) {
+    for (var i = 0; i < modalContents.length; i++) {
+      var isClickInsideModal = modalContents[i].contains(event.target);
+
+      if (isClickInsideModal) {
+        // Click occurred inside one of the modal contents, no need to show alert
+        return;
+      }
+    }
+
+    // Click occurred outside all modal contents
+    alert("Please sign up to proceed !");
+  });
+});
+
+// loader
 
 // document.getElementsByClassName('redirectButton').addEventListener('click', function() {
 //         // Get the modal content element
@@ -50,8 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //         // Add a class to hide the modal content
 //         modalContent.classList.add('hidden');
-    
-    
+
 //     // Add 'loading' class to the loader
 //     document.getElementById('loader').classList.add('loading');
 
@@ -63,13 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
 //     }, 1000);
 // });
 
-
 // redirect to main page
-const signupButton = document.getElementById('signupButton');
+const signupButton = document.getElementById("signupButton");
 
 // Attach event listener
-signupButton.addEventListener('click', () => {
-    window.location.href = 'date.html';
+signupButton.addEventListener("click", () => {
+  window.location.href = "date.html";
 });
-
-
